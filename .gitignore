@@ -110,3 +110,6 @@ scheduler.json
 
 # log files
 *.out
+
+# secrets file
+secret-config.yaml
