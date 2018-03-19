@@ -51,10 +51,10 @@ printf " done.\n\n"
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
 #helm install jupyterhub/jupyterhub --name=jupyter --namespace=pangeo -f secret-config.yaml -f jupyter-config_gcp.yaml
-helm install jupyterhub/jupyterhub --version=v0.6.0-9701a90 --name=jupyter --namespace=pangeo -f secret-config.yaml -f jupyter-config_gcp.yaml
+helm install jupyterhub/jupyterhub --version=v0.6.0-9701a90 --name=jupyter --namespace=jupyter -f secret-config.yaml -f jupyter-config_gcp.yaml
 
 # create the kubernetesdask service account
-#kubectl create -f dask-kubernetes-serviceaccount.yaml
+kubectl create -f dask-kubernetes-serviceaccount.yaml
 
 #echo "Installing dask."
 #helm install dask/dask --name=dask --namespace=pangeo -f dask-config.yaml

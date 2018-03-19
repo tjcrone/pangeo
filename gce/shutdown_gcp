@@ -5,7 +5,7 @@ echo "Deleting jupyter ... "
 helm delete jupyter --purge
 echo
 
-# delete pangeo namespace
+# delete jupyter namespace
 echo "Deleting jupyter namespace ..."
 kubectl delete namespace jupyter
 echo
