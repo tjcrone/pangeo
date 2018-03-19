@@ -6,8 +6,8 @@ helm delete jupyter --purge
 echo
 
 # delete pangeo namespace
-echo "Deleting pangeo namespace ..."
-kubectl delete namespace pangeo
+echo "Deleting jupyter namespace ..."
+kubectl delete namespace jupyter
 echo
 
 # delete cluster

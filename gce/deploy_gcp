@@ -24,7 +24,7 @@ MIN_NODES=2
 MAX_NODES=20
 
 # create cluster on GCP
-gcloud container clusters create pangeo --enable-autoscaling --max-nodes=$MAX_NODES --min-nodes=$MIN_NODES --machine-type=n1-standard-2 --zone=$ZONE --enable-legacy-authorization --cluster-version=1.9.4-gke.1
+gcloud container clusters create pangeo --enable-autoscaling --max-nodes=$MAX_NODES --min-nodes=$MIN_NODES --machine-type=n1-standard-2 --zone=$ZONE --no-enable-legacy-authorization --cluster-version=1.9.4-gke.1
 gcloud container clusters get-credentials pangeo --zone=$ZONE --project $PROJECTID
 
 # set up kubernetes
@@ -52,6 +52,9 @@ printf " done.\n\n"
 echo "Installing jupyterhub."
 #helm install jupyterhub/jupyterhub --name=jupyter --namespace=pangeo -f secret-config.yaml -f jupyter-config_gcp.yaml
 helm install jupyterhub/jupyterhub --version=v0.6.0-9701a90 --name=jupyter --namespace=pangeo -f secret-config.yaml -f jupyter-config_gcp.yaml
+
+# create the kubernetesdask service account
+#kubectl create -f dask-kubernetes-serviceaccount.yaml
 
 #echo "Installing dask."
 #helm install dask/dask --name=dask --namespace=pangeo -f dask-config.yaml

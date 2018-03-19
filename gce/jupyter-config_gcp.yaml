@@ -20,13 +20,14 @@ singleuser:
   memory:
     limit: 4G
     guarantee: 1G
+  serviceAccountName: daskkubernetes
 
-rbac:
-    enabled: false
+#rbac:
+#    enabled: false
 
 hub:
   extraConfig: |
-    c.KubeSpawner.singleuser_service_account = 'default'
+    c.KubeSpawner.singleuser_service_account = 'daskkubernetes'
     c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
     c.Spawner.default_url = '/lab'
     from kubernetes import client
