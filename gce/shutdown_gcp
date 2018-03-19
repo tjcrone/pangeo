@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# delete jupyter release
+echo "Deleting jupyter ... "
+helm delete jupyter --purge
+echo
+
+# delete pangeo namespace
+echo "Deleting pangeo namespace ..."
+kubectl delete namespace pangeo
+echo
+
+# delete cluster
+gcloud container clusters delete pangeo --zone us-east4-a --quiet
+echo
+
+# delete disks
+echo "Deleting all disks ... "
+gcloud compute disks list | grep -v ^NAME | sed 's/  */ /g' | cut -d' ' -f1 | \
+  xargs gcloud compute disks delete --quiet --zone=us-east4-a
