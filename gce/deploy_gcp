@@ -7,8 +7,8 @@
 # 3) in APIs and Services enable the Kubernetes Engine API for the pangeo project
 
 # on local computer
-# 1) install google cloud sdk
-# 2) install helm >=v2.8.2 (brew install kubernetes-helm)
+# 1) install google cloud sdk (https://cloud.google.com/sdk/downloads)
+# 2) install helm >=v2.8.2 (https://github.com/kubernetes/helm/blob/master/docs/install.md)
 # 3) setup gcloud sdk
 #    - gcloud components update
 #    - gcloud components install kubectl
