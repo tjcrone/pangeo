@@ -8,12 +8,13 @@
 
 # on local computer
 # 1) install google cloud sdk
-# 2) install helm (previous version?)
-
-# setup gcloud sdk on local computer
-#gcloud components update
-#gcloud components install kupectl
-#gcloud auth login
+# 2) install helm >=v2.8.2 (brew install kubernetes-helm)
+# 3) setup gcloud sdk
+#    - gcloud components update
+#    - gcloud components install kubectl
+#    - gcloud config set container/new_scopes_behavior true
+#    - gcloud config set project $PROJECTID
+#    - gcloud auth login
 
 # settings
 EMAIL='tjcrone@gmail.com'
@@ -23,8 +24,6 @@ MIN_NODES=2
 MAX_NODES=20
 
 # create cluster on GCP
-gcloud config set container/new_scopes_behavior true
-gcloud config set project $PROJECTID
 gcloud container clusters create pangeo --enable-autoscaling --max-nodes=$MAX_NODES --min-nodes=$MIN_NODES --machine-type=n1-standard-2 --zone=$ZONE --enable-legacy-authorization --cluster-version=1.9.4-gke.1
 gcloud container clusters get-credentials pangeo --zone=$ZONE --project $PROJECTID
 
