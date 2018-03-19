@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# zones
+ZONE=us-east4-a
+REGION=us-east4
+
 # delete jupyter release
 echo "Deleting jupyter ... "
 helm delete jupyter --purge
@@ -11,22 +15,22 @@ kubectl delete namespace jupyter
 echo
 
 # delete cluster
-gcloud container clusters delete pangeo --zone us-east4-a --quiet
+gcloud container clusters delete pangeo --zone $ZONE --quiet
 echo
 
 # delete disks
 echo "Deleting all disks ... "
 gcloud compute disks list | grep -v ^NAME | sed 's/  */ /g' | cut -d' ' -f1 | \
-  xargs gcloud compute disks delete --quiet --zone=us-east4-a
+  xargs gcloud compute disks delete --quiet --zone=$ZONE
 echo
 
 # delete forwarding-rules
 echo "Deleting all forwarding-rules ... "
 gcloud compute forwarding-rules list | grep -v ^NAME | sed 's/  */ /g' | cut -d' ' -f1 | \
-  xargs gcloud compute forwarding-rules delete --quiet --region=us-east4
+  xargs gcloud compute forwarding-rules delete --quiet --region=$REGION
 echo
 
 # delete target-pools
 echo "Deleting all target-pools ... "
 gcloud compute target-pools list | grep -v ^NAME | sed 's/  */ /g' | cut -d' ' -f1 | \
-  xargs gcloud compute target-pools delete --quiet --region=us-east4
+  xargs gcloud compute target-pools delete --quiet --region=$REGION
