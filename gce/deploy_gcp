@@ -21,10 +21,11 @@ EMAIL='tjcrone@gmail.com'
 PROJECTID='pangeo-198314'
 ZONE='us-east4-a'
 MIN_NODES=2
-MAX_NODES=20
+MAX_NODES=12
+NUM_NODES=2
 
 # create cluster on GCP
-gcloud container clusters create pangeo --enable-autoscaling --max-nodes=$MAX_NODES --min-nodes=$MIN_NODES --machine-type=n1-standard-2 --zone=$ZONE --no-enable-legacy-authorization --cluster-version=1.9.4-gke.1
+gcloud container clusters create pangeo --num-nodes=$NUM_NODES --enable-autoscaling --max-nodes=$MAX_NODES --min-nodes=$MIN_NODES --machine-type=n1-standard-2 --zone=$ZONE --no-enable-legacy-authorization --cluster-version=1.9.4-gke.1
 gcloud container clusters get-credentials pangeo --zone=$ZONE --project $PROJECTID
 
 # set up kubernetes
