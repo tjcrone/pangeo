@@ -44,9 +44,9 @@ helm repo update
 
 # wait for tiller to come up
 printf "\nWaiting for tiller to come up ..."
-test=`helm status 2>&1`
-while [[ $test = *"ready tiller"* ]]; do
-  test=`helm status 2>&1`
+test=`helm status 2>&1 | cut -d' ' -f1-2`
+while [[ $test != "Error: release" ]]; do
+  test=`helm status 2>&1 | cut -d' ' -f1-2`
   sleep 1
 done
 printf " done.\n\n"
