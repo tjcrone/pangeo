@@ -15,6 +15,8 @@
 #    - gcloud config set container/new_scopes_behavior true
 #    - gcloud auth login
 # 4) modify secret-config.yaml file, replacing TOKEN with output from `openssl rand -hex 32`
+# 5) modify the settings section of this file to match your settings and requirements
+# 6) run this file on a not-windows machine
 
 # settings
 EMAIL='tjcrone@gmail.com'
