@@ -14,6 +14,7 @@
 #    - gcloud components install kubectl
 #    - gcloud config set container/new_scopes_behavior true
 #    - gcloud auth login
+# 4) modify secret-config.yaml file, replacing TOKEN with output from `openssl rand -hex 32`
 
 # settings
 EMAIL='tjcrone@gmail.com'
