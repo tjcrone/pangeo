@@ -20,10 +20,6 @@ singleuser:
   memory:
     limit: 4G
     guarantee: 1G
-  serviceAccountName: daskkubernetes
-
-#rbac:
-#    enabled: false
 
 hub:
   extraConfig: |
