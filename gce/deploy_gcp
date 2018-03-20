@@ -32,6 +32,7 @@ gcloud container clusters get-credentials pangeo --zone=$ZONE --project $PROJECT
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$EMAIL
 kubectl --namespace kube-system create sa tiller
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+
 helm init --service-account tiller
 #helm init --wait --service-account tiller
 kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
@@ -54,4 +55,15 @@ echo "Installing jupyterhub."
 helm install jupyterhub/jupyterhub --version=v0.6.0-9701a90 --name=jupyter --namespace=jupyter -f secret-config.yaml -f jupyter-config_gcp.yaml
 
 # create the kubernetesdask service account and role bindings
+echo "Installing service account for dask-kubernetes."
 kubectl create -f dask-kubernetes-serviceaccount.yaml
+
+# wait for external ip address
+printf "\nWaiting for external IP address ..."
+IP=`kubectl --namespace=jupyter get svc proxy-public | grep -v "^NAME" | sed 's/  */ /g' | cut -d' ' -f4`
+while [ $IP == "<pending>" ]; do
+  IP=`kubectl --namespace=jupyter get svc proxy-public | grep -v "^NAME" | sed 's/  */ /g' | cut -d' ' -f4`
+  sleep 1
+done
+printf " done.\n\n"
+echo "Jupyterlab can now be accessed at $IP"
