@@ -13,7 +13,6 @@
 #    - gcloud components update
 #    - gcloud components install kubectl
 #    - gcloud config set container/new_scopes_behavior true
-#    - gcloud config set project $PROJECTID
 #    - gcloud auth login
 
 # settings
@@ -25,6 +24,7 @@ MIN_WORKER_NODES=0
 MAX_WORKER_NODES=10
 
 # create cluster on GCP
+gcloud config set project $PROJECTID
 gcloud container clusters create pangeo --num-nodes=$NUM_NODES --machine-type=n1-standard-2 --zone=$ZONE --no-enable-legacy-authorization --cluster-version=1.9.4-gke.1
 gcloud container node-pools create worker-pool --zone=$ZONE --cluster=pangeo --machine-type=n1-standard-4 --preemptible --enable-autoscaling --num-nodes=$MIN_WORKER_NODES --max-nodes=$MAX_WORKER_NODES --min-nodes=$MIN_WORKER_NODES
 gcloud container clusters get-credentials pangeo --zone=$ZONE --project $PROJECTID
