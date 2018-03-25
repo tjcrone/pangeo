@@ -113,3 +113,6 @@ scheduler.json
 
 # secrets file
 secret-config.yaml
+
+# azure directories
+rte-pangeo*
