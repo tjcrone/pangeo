@@ -36,5 +36,6 @@ gcloud compute target-pools list | grep -v ^NAME | sed 's/  */ /g' | cut -d' ' -
   xargs gcloud compute target-pools delete --quiet --region=$REGION
 
 # delete vpc network firewall-rules
+echo "Deleting all firewall-rules ... "
 gcloud compute firewall-rules list --format=yaml | grep ^name | cut -d' ' -f2 | \
   xargs gcloud compute firewall-rules delete --quiet
