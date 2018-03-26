@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# delete jupyter release
+echo "Deleting jupyter ... "
+helm delete jupyter --purge
+echo
+
+# delete jupyter namespace
+echo "Deleting jupyter namespace ..."
+kubectl delete namespace jupyter
+echo
+
+# delete resource groups
+echo "Deleting rte-pangeo resource groups ... "
+az group list --output table | grep "^rte-pangeo" | cut -d' ' -f1 | xargs -t -n1 az group delete --no-wait --yes --name
