@@ -16,7 +16,7 @@ set -e
 #    - az provider register --name Microsoft.Storage --wait
 #    - az provider register --name Microsoft.ContainerService --wait
 # 4) install helm >=v2.8.2 (https://github.com/kubernetes/helm/blob/master/docs/install.md)
-# 5) modify secret-template.yaml file, replacing TOKEN with output from `openssl rand -hex 32`, and rename it secret-config.yaml
+# 5) modify secret-template.yaml file, replacing TOKEN with output from `openssl rand -hex 32`, and rename it secret-config_azure.yaml
 # 6) modify the settings section of this file to match your settings and requirements
 # 7) run this file on a not-windows machine
 
@@ -83,7 +83,7 @@ printf " done.\n\n"
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
 cd ..
-helm install jupyterhub/jupyterhub --version=v0.7-f58c7e7 --name=jupyter --namespace=jupyter -f secret-config.yaml -f jupyter-config_azure.yaml
+helm install jupyterhub/jupyterhub --version=v0.7-f58c7e7 --name=jupyter --namespace=jupyter -f secret-config_azure.yaml -f jupyter-config_azure.yaml
 
 # wait for external ip address
 printf "\nWaiting for external IP address ..."
