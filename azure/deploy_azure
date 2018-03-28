@@ -26,7 +26,7 @@ RESOURCE_GROUP="rte-pangeo-$DTIME"
 LOCATION='eastus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
 CLUSTER_NAME="rte-pangeo-$DTIME"
-MACHINE='Standard_D8_v3'
+MACHINE='Standard_D2_v3'
 NODE_COUNT=1
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
@@ -44,24 +44,15 @@ chmod 600 pass-$CLUSTER_NAME
 
 # create an AKS cluster
 printf "\nCreating cluster.\n"
-az aks create --name $CLUSTER_NAME \
-              --resource-group $RESOURCE_GROUP \
-              --ssh-key-value ssh-key-$CLUSTER_NAME.pub \
-              --node-count $NODE_COUNT \
-              --node-vm-size $MACHINE \
-              --kubernetes-version 1.8.6 \
-              --output table
+az aks create --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --ssh-key-value ssh-key-$CLUSTER_NAME.pub --node-count $NODE_COUNT --node-vm-size $MACHINE --kubernetes-version 1.8.6 --output table
+cd ..
 
 # get credentials
 printf "\nGetting AKS credentials.\n"
-az aks get-credentials \
-             --name $CLUSTER_NAME \
-             --resource-group $RESOURCE_GROUP \
-             --output table
+az aks get-credentials --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --output table
 
-# set up tiller
+# set up helm and tiller
 kubectl create serviceaccount tiller --namespace=kube-system
-helm reset --remove-helm-home
 helm init --service-account tiller
 kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
 
@@ -80,7 +71,6 @@ printf " done.\n\n"
 
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
-cd ..
 helm install jupyterhub/jupyterhub --version=v0.7-f58c7e7 --name=jupyter --namespace=jupyter -f secret-config_azure.yaml -f jupyter-config_azure.yaml
 
 # wait for external ip address
