@@ -30,9 +30,6 @@ MACHINE='Standard_D8_v3'
 NODE_COUNT=1
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
-# reset helm
-rm -rf ~/.helm
-
 # setup azure and local env
 echo "Setting account name."
 az account set -s "$SUBSCRIPTION"
@@ -64,6 +61,7 @@ az aks get-credentials \
 
 # set up tiller
 kubectl create serviceaccount tiller --namespace=kube-system
+helm reset --remove-helm-home
 helm init --service-account tiller
 kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
 
