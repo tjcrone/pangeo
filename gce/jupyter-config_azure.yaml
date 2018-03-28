@@ -21,11 +21,11 @@ singleuser:
     limit: 4G
     guarantee: 1G
 
-prePuller:
-  enabled: false
-
-#rbac:
+#prePuller:
 #  enabled: false
+
+rbac:
+  enabled: false
 
 hub:
   extraConfig: |
