@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#settings
+USER='tjcrone'
+
 # delete jupyter release
 echo "Deleting jupyter ... "
 helm delete jupyter --purge
@@ -12,11 +15,12 @@ echo
 
 # delete resource groups
 echo "Deleting rte-pangeo resource groups ... "
-az group list --output table | grep "^rte-pangeo" | cut -d' ' -f1 | xargs -t -n1 az group delete --no-wait --yes --name
+az group list --output table | grep "^$USER-rte-pangeo" | cut -d' ' -f1 | xargs -t -n1 az group delete --no-wait --yes --name
+echo
 
 # delete service principals
 echo "Deleting rte-pangeo service principals ... "
-az ad sp list --output table | grep rte-pangeo | sed -e 's/  \{1,\}/,/g' | cut -d',' -f3 | xargs -t -n1 az ad sp delete --id
+az ad sp list --output table | grep "$USER-rte-pangeo" | sed -e 's/  \{1,\}/,/g' | cut -d',' -f3 | xargs -t -n1 az ad sp delete --id
 
 # delete cached service principal
 printf "\nDeleting rte-pangeo service principal cache ... "

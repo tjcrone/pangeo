@@ -21,11 +21,12 @@ set -e
 # 7) run this file on a not-windows machine
 
 # settings
+USER='tjcrone'
 DTIME=`date "+%Y%m%d%H%M%S"`
-RESOURCE_GROUP="rte-pangeo-$DTIME"
+RESOURCE_GROUP="$USER-rte-pangeo-$DTIME"
 LOCATION='eastus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
-CLUSTER_NAME="rte-pangeo-$DTIME"
+CLUSTER_NAME="$USER-rte-pangeo-$DTIME"
 MACHINE='Standard_D2_v3'
 NODE_COUNT=1
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
