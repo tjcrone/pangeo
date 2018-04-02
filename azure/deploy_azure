@@ -22,6 +22,8 @@ set -e
 
 # settings
 USER='tjcrone'
+#USER='gregyhj'
+#USER='al3623'
 DTIME=`date "+%Y%m%d%H%M%S"`
 RESOURCE_GROUP="$USER-rte-pangeo-$DTIME"
 LOCATION='eastus'

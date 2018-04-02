@@ -2,6 +2,8 @@
 
 #settings
 USER='tjcrone'
+#USER='gregyhj'
+#USER='al3623'
 
 # delete jupyter release
 echo "Deleting jupyter ... "
