@@ -26,7 +26,7 @@ USER='tjcrone'
 #USER='al3623'
 DTIME=`date "+%Y%m%d%H%M%S"`
 RESOURCE_GROUP="$USER-rte-pangeo-$DTIME"
-LOCATION='eastus'
+LOCATION='centralus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
 CLUSTER_NAME="$USER-rte-pangeo-$DTIME"
 MACHINE='Standard_D2_v3'
@@ -71,6 +71,8 @@ while [[ $test != "Error: release" ]]; do
   sleep 1
 done
 printf " done.\n\n"
+
+exit
 
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
