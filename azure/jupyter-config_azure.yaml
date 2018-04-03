@@ -15,11 +15,11 @@ singleuser:
 #      - name: fuse
 #        mountPath: /dev/fuse
   cpu:
-    limit: 2
-    guarantee: 1
+    limit: 1.8
+    guarantee: 0.9
   memory:
-    limit: 4G
-    guarantee: 1G
+    limit: 8G
+    guarantee: 4G
 
 rbac:
   enabled: false
@@ -27,6 +27,7 @@ rbac:
 hub:
   extraConfig: |
     c.KubeSpawner.singleuser_service_account = 'default'
+    c.KubeSpawner.start_timeout = 60 * 10 # 10-minute timeout for Azure
     c.Spawner.default_url = '/lab'
     from kubernetes import client
     def modify_pod_hook(spawner, pod):
