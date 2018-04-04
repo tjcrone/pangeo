@@ -1,10 +1,15 @@
-FROM continuumio/miniconda3:4.3.14
+FROM jupyter/base-notebook
+USER root
+
+RUN conda update -y conda
+RUN pip install --upgrade pip
 
 # Dumb init
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
+RUN wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda install --yes -c conda-forge \
+    cython \
     cytoolz \
     dask=0.17.2 \
     distributed=1.21.4 \
@@ -25,7 +30,7 @@ RUN conda install --yes -c conda-forge \
     && conda clean -tipsy
 
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse pkgconf ffmpeg libavfilter-dev libavdevice-dev build-essential \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -37,6 +42,11 @@ RUN pip install git+https://github.com/zarr-developers/zarr \
                 fusepy \
                 --no-cache-dir \
                 --upgrade
+
+
+RUN pip install av==0.4.0 \
+                numpngw \
+                git+https://github.com/tjcrone/pycamhd
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s

@@ -8,10 +8,10 @@ spec:
       - '2'
       - --no-bokeh
       - --memory-limit
-      - 6GB
+      - 4GB
       - --death-timeout
       - '60'
-    image: pangeo/worker:2018-03-11
+    image: tjcrone/pangeo-worker:
     name: dask-worker
     securityContext:
       capabilities:
