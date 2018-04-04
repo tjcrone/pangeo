@@ -11,7 +11,7 @@ RUN conda update -y conda
 RUN pip install --upgrade pip
 
 RUN conda install --yes -c ioam -c conda-forge \
-    bokeh=0.12.14
+    bokeh=0.12.14 \
     cython \
     cytoolz \
     datashader \
@@ -30,6 +30,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     numcodecs \
     numpy \
     pandas \
+    pytables \
     python-blosc \
     scipy \
     scikit-image \

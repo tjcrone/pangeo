@@ -22,6 +22,7 @@ RUN conda install --yes -c conda-forge \
     numcodecs \
     numpy \
     pandas \
+    pytables \
     python-blosc \
     scikit-image \
     scipy \
