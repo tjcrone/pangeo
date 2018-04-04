@@ -1,7 +1,7 @@
 singleuser:
   image:
     name: tjcrone/pangeo-notebook
-    tag: 620cbb9
+    tag: 4b1873c
   cmd: ['start-singleuser.sh']
 #  extraEnv:
 #    EXTRA_PIP_PACKAGES: >-
@@ -29,7 +29,6 @@ hub:
     c.KubeSpawner.singleuser_service_account = 'default'
     c.KubeSpawner.start_timeout = 60 * 10 # 10-minute timeout for Azure
     c.Spawner.default_url = '/lab'
-    c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
     from kubernetes import client
     def modify_pod_hook(spawner, pod):
         pod.spec.containers[0].security_context = client.V1SecurityContext(

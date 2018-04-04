@@ -45,7 +45,8 @@ RUN pip install git+https://github.com/zarr-developers/zarr \
 
 RUN pip install av==0.4.0 \
                 numpngw \
-                git+https://github.com/tjcrone/pycamhd
+                git+https://github.com/tjcrone/pycamhd \
+                azure-storage-blob
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s

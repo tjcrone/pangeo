@@ -50,7 +50,8 @@ RUN pip install dask-kubernetes==0.2.0 \
 
 RUN pip install av==0.4.0 \
                 numpngw \
-                git+https://github.com/tjcrone/pycamhd
+                git+https://github.com/tjcrone/pycamhd \
+                azure-storage-blob
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
                                  @jupyterlab/hub-extension \
