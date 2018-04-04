@@ -43,6 +43,7 @@ RUN pip install fusepy click jedi kubernetes --upgrade --no-cache-dir
 
 RUN pip install dask-kubernetes==0.2.0 \
                 git+https://github.com/zarr-developers/zarr \
+                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir \
                 --upgrade
