@@ -37,5 +37,5 @@ if [ $? -eq 0 ]; then
   sed -i '' "s/    tag.*/    tag: ${TAG}/" jupyter-config_azure.yaml
 
 else
-    printf "\nPlease commit your changes first.\n\n"
+    printf "\nPlease stash or commit your changes before updating the Pangeo images with a commit tag.\n\n"
 fi
