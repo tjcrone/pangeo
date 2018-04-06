@@ -55,7 +55,8 @@ RUN pip install av==0.4.0 \
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
                                  @jupyterlab/hub-extension \
-                                 @pyviz/jupyterlab_holoviews
+                                 @pyviz/jupyterlab_holoviews \
+                                 jupyterlab_bokeh
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
