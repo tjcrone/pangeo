@@ -45,7 +45,7 @@ ssh-keygen -P $PASSPHRASE -f ssh-key-$CLUSTER_NAME
 echo $PASSPHRASE > pass-$CLUSTER_NAME
 chmod 600 pass-$CLUSTER_NAME
 
-# okay to do these every time
+# usually these only need to be done once but okay to do each time
 az provider register --name Microsoft.Network --wait
 az provider register --name Microsoft.Compute --wait
 az provider register --name Microsoft.Storage --wait
@@ -78,11 +78,9 @@ while [[ $test != "Error: release" ]]; do
 done
 printf " done.\n\n"
 
-exit
-
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
-helm install jupyterhub/jupyterhub --version=v0.7-f58c7e7 --name=jupyter --namespace=jupyter -f secret-config_azure.yaml -f jupyter-config_azure.yaml
+helm install jupyterhub/jupyterhub --version=v0.7-4316447 --name=jupyter --namespace=jupyter -f secret-config_azure.yaml -f jupyter-config_azure.yaml
 
 # wait for external ip address
 printf "\nWaiting for external IP address ..."
