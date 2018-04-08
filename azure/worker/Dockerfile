@@ -9,7 +9,7 @@ RUN wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releas
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda install --yes -c conda-forge \
-    cython \
+    av=0.4.0 \
     cytoolz \
     dask=0.17.2 \
     distributed=1.21.4 \
@@ -31,7 +31,7 @@ RUN conda install --yes -c conda-forge \
     && conda clean -tipsy
 
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse pkgconf ffmpeg libavfilter-dev libavdevice-dev build-essential \
+  && apt-get install -yq --no-install-recommends libfuse-dev fuse \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -42,9 +42,7 @@ RUN pip install git+https://github.com/zarr-developers/zarr \
                 --no-cache-dir \
                 --upgrade
 
-
-RUN pip install av==0.4.0 \
-                numpngw \
+RUN pip install numpngw \
                 git+https://github.com/tjcrone/pycamhd \
                 azure-storage-blob
 

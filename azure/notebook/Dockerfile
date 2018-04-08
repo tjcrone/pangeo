@@ -2,7 +2,7 @@ FROM jupyter/base-notebook
 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git jq less pkgconf ffmpeg libavfilter-dev libavdevice-dev build-essential openssh-client \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git jq less openssh-client \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
@@ -11,8 +11,8 @@ RUN conda update -y conda
 RUN pip install --upgrade pip
 
 RUN conda install --yes -c ioam -c conda-forge \
+    av=0.4.0 \
     bokeh=0.12.14 \
-    cython \
     cytoolz \
     datashader \
     dask=0.17.2 \
@@ -48,8 +48,7 @@ RUN pip install dask-kubernetes==0.2.0 \
                 --no-cache-dir \
                 --upgrade
 
-RUN pip install av==0.4.0 \
-                numpngw \
+RUN pip install numpngw \
                 git+https://github.com/tjcrone/pycamhd \
                 azure-storage-blob
 
