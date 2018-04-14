@@ -15,6 +15,7 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.4 \
     fastparquet \
     git \
+    google-cloud-storage \
     lz4 \
     netcdf4 \
     nomkl \
@@ -37,7 +38,7 @@ RUN apt-get update \
 
 RUN pip install pyasn1 click urllib3 --upgrade
 
-RUN pip install git+https://github.com/zarr-developers/zarr \
+RUN pip install git+https://github.com/tjcrone/zarr \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8 \
                 --no-cache-dir \
                 --upgrade

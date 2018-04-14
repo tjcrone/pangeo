@@ -1,8 +1,13 @@
 FROM jupyter/base-notebook
 
 USER root
+
+RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-xenial main" > /etc/apt/sources.list.d/google-cloud-sdk.list
+
+RUN wget https://packages.cloud.google.com/apt/doc/apt-key.gpg -q -O - | sudo apt-key add -
+
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git jq less openssh-client \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git jq less openssh-client google-cloud-sdk \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
@@ -18,6 +23,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     dask=0.17.2 \
     distributed=1.21.4 \
     fastparquet \
+    google-cloud-storage \
     ipywidgets \
     jupyterlab \
     holoviews \
@@ -42,7 +48,7 @@ RUN conda install --yes -c ioam -c conda-forge \
 RUN pip install fusepy click jedi kubernetes --upgrade --no-cache-dir
 
 RUN pip install dask-kubernetes==0.2.0 \
-                git+https://github.com/zarr-developers/zarr \
+                git+https://github.com/tjcrone/zarr \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir \
@@ -52,7 +58,7 @@ RUN pip install numpngw \
                 git+https://github.com/tjcrone/pycamhd \
                 azure-storage-blob
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34.0 \
                                  @jupyterlab/hub-extension \
                                  @pyviz/jupyterlab_holoviews \
                                  jupyterlab_bokeh

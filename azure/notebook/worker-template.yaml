@@ -11,7 +11,7 @@ spec:
       - 4GB
       - --death-timeout
       - '60'
-    image: tjcrone/pangeo-worker:0d5efdb
+    image: tjcrone/pangeo-worker:8201754
     name: dask-worker
     securityContext:
       capabilities:
