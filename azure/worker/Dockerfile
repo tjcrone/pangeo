@@ -38,7 +38,7 @@ RUN apt-get update \
 
 RUN pip install pyasn1 click urllib3 --upgrade
 
-RUN pip install git+https://github.com/tjcrone/zarr@2d9da3e11717fddf10589bb5497980dcf6ff2679 \
+RUN pip install git+https://github.com/tjcrone/zarr@10738c84c62c83ce8e9ef64d9b53491157d97013 \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8 \
                 --no-cache-dir \
                 --upgrade
