@@ -26,10 +26,12 @@ USER='tjcrone'
 #USER='al3623'
 DTIME=`date "+%Y%m%d%H%M%S"`
 RESOURCE_GROUP="$USER-rte-pangeo-$DTIME"
+# currently (17 April 2018) k8s only available in:
+# eastus, westeurope, centralus, canadacentral, canadaeast
 LOCATION='centralus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
 CLUSTER_NAME="$USER-rte-pangeo-$DTIME"
-MACHINE='Standard_D2_v3'
+MACHINE='Standard_D4_v3'
 NODE_COUNT=1
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
@@ -77,6 +79,8 @@ while [[ $test != "Error: release" ]]; do
   sleep 1
 done
 printf " done.\n\n"
+
+exit
 
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
