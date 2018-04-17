@@ -48,7 +48,7 @@ RUN conda install --yes -c ioam -c conda-forge \
 RUN pip install fusepy click jedi kubernetes --upgrade --no-cache-dir
 
 RUN pip install dask-kubernetes==0.2.0 \
-                git+https://github.com/tjcrone/zarr@abs_store \
+                git+https://github.com/tjcrone/zarr@2d9da3e11717fddf10589bb5497980dcf6ff2679 \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir \
