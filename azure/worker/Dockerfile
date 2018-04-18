@@ -44,7 +44,7 @@ RUN pip install git+https://github.com/tjcrone/zarr@10738c84c62c83ce8e9ef64d9b53
                 --upgrade
 
 RUN pip install numpngw \
-                git+https://github.com/tjcrone/pycamhd \
+                git+https://github.com/tjcrone/pycamhd@5d68ab1196daed61aaed196351dadc8bf11ac2a7 \
                 azure-storage-blob
 
 ENV OMP_NUM_THREADS=1

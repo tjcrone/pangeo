@@ -55,13 +55,13 @@ RUN pip install dask-kubernetes==0.2.0 \
                 --upgrade
 
 RUN pip install numpngw \
-                git+https://github.com/tjcrone/pycamhd \
+                git+https://github.com/tjcrone/pycamhd@5d68ab1196daed61aaed196351dadc8bf11ac2a7 \
                 azure-storage-blob
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34.0 \
-                                 @jupyterlab/hub-extension \
-                                 @pyviz/jupyterlab_holoviews \
-                                 jupyterlab_bokeh
+                                 @jupyterlab/hub-extension@0.8.1 \
+                                 @pyviz/jupyterlab_holoviews@0.4.0 \
+                                 jupyterlab_bokeh@0.4.0
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
