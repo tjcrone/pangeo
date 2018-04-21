@@ -61,7 +61,7 @@ RUN pip install numpngw \
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34.0 \
                                  @jupyterlab/hub-extension@0.8.1 \
                                  @pyviz/jupyterlab_holoviews@0.4.0 \
-                                 jupyterlab_bokeh@0.4.0
+                                 jupyterlab_bokeh@0.4.1
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
