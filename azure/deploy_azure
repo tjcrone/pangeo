@@ -25,12 +25,12 @@ USER='tjcrone'
 #USER='gregyhj'
 #USER='al3623'
 DTIME=`date "+%Y%m%d%H%M%S"`
-RESOURCE_GROUP="$USER-rte-pangeo-$DTIME"
+RESOURCE_GROUP="camhd-pangeo"
 # currently (17 April 2018) k8s only available in:
 # eastus, westeurope, centralus, canadacentral, canadaeast
 LOCATION='centralus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
-CLUSTER_NAME="$USER-rte-pangeo-$DTIME"
+CLUSTER_NAME="camhd-pangeo-$DTIME"
 MACHINE='Standard_D4_v3'
 NODE_COUNT=1
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
@@ -80,11 +80,9 @@ while [[ $test != "Error: release" ]]; do
 done
 printf " done.\n\n"
 
-exit
-
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
-helm install jupyterhub/jupyterhub --version=v0.7-4316447 --name=jupyter --namespace=jupyter -f secret-config_azure.yaml -f jupyter-config_azure.yaml
+helm install jupyterhub/jupyterhub --version=v0.7-82bed4a --name=jupyter --namespace=jupyter -f nosecret-config.yaml -f jupyter-config.yaml
 
 # wait for external ip address
 printf "\nWaiting for external IP address ..."
