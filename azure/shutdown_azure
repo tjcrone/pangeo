@@ -17,7 +17,7 @@ echo
 
 # delete resource groups
 echo "Deleting rte-pangeo resource groups ... "
-az group list --output table | grep "^$USER-rte-pangeo" | cut -d' ' -f1 | xargs -t -n1 az group delete --no-wait --yes --name
+az group list --output table | grep "^camhd-pangeo" | cut -d' ' -f1 | xargs -t -n1 az group delete --no-wait --yes --name
 echo
 
 # delete service principals

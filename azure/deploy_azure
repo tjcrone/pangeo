@@ -80,9 +80,12 @@ while [[ $test != "Error: release" ]]; do
 done
 printf " done.\n\n"
 
+# replace secret
+sed -i '' -e "s/^  secretToken.*/  secretToken: \"$(openssl rand -hex 32)\"/" nosecret-config.yaml
+
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
-helm install jupyterhub/jupyterhub --version=v0.7-82bed4a --name=jupyter --namespace=jupyter -f nosecret-config.yaml -f jupyter-config.yaml
+helm install jupyterhub/jupyterhub --version=v0.7-82bed4a --name=jupyter --namespace=jupyter --timeout=600 -f nosecret-config.yaml -f jupyter-config.yaml
 
 # wait for external ip address
 printf "\nWaiting for external IP address ..."
