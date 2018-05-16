@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
 
   # update jupyter-config
   cd $AZURE_DIR
-  sed -i '' "s/    tag.*/    tag: ${TAG}/" jupyter-config_azure.yaml
+  sed -i '' "s/    tag.*/    tag: ${TAG}/" jupyter-config.yaml
 
 else
     printf "\nPlease stash or commit your changes before updating the Pangeo images with a commit tag.\n\n"
