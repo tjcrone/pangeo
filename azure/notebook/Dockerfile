@@ -25,7 +25,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     fastparquet \
     google-cloud-storage \
     ipywidgets \
-    jupyterlab \
+    jupyterlab=0.32.1 \
     julia \
     holoviews \
     lz4 \
@@ -59,7 +59,7 @@ RUN pip install numpngw \
                 pycamhd \
                 azure-storage-blob
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34.0 \
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35.0 \
                                  @jupyterlab/hub-extension@0.8.1 \
                                  @pyviz/jupyterlab_holoviews@0.4.0 \
                                  jupyterlab_bokeh@0.4.1
