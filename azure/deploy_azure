@@ -53,7 +53,7 @@ az provider register --name Microsoft.ContainerService --wait
 
 # create an AKS cluster
 printf "\nCreating cluster.\n"
-az aks create --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --ssh-key-value ssh-key-$CLUSTER_NAME.pub --node-count $NODE_COUNT --node-vm-size $MACHINE --kubernetes-version 1.8.6 --output table
+az aks create --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --ssh-key-value ssh-key-$CLUSTER_NAME.pub --node-count $NODE_COUNT --node-vm-size $MACHINE --kubernetes-version 1.9.6 --output table
 cd ..
 
 # get credentials
