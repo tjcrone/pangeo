@@ -26,6 +26,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     google-cloud-storage \
     ipywidgets \
     jupyterlab \
+    julia \
     holoviews \
     lz4 \
     matplotlib \
@@ -68,10 +69,7 @@ RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
-RUN mkdir /home/$NB_USER/examples && chown -R $NB_USER /home/$NB_USER/examples
-RUN mkdir /pre-home && mkdir /pre-home/examples && chown -R $NB_USER /pre-home
 COPY worker-template.yaml /pre-home
-COPY examples/ /pre-home/examples/
 
 ENV DASK_TICK_MAXIMUM_DELAY=5s
 ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
