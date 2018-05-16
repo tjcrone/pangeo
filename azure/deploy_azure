@@ -22,8 +22,6 @@ set -e
 
 # settings
 USER='tjcrone'
-#USER='gregyhj'
-#USER='al3623'
 DTIME=`date "+%Y%m%d%H%M%S"`
 RESOURCE_GROUP="camhd-pangeo"
 # currently (17 April 2018) k8s only available in:
@@ -32,7 +30,7 @@ LOCATION='centralus'
 SUBSCRIPTION='Microsoft Azure Sponsorship'
 CLUSTER_NAME="camhd-pangeo-$DTIME"
 MACHINE='Standard_D4_v3'
-NODE_COUNT=1
+NODE_COUNT=3
 PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 # setup azure and local env
@@ -81,7 +79,9 @@ done
 printf " done.\n\n"
 
 # replace secret
-sed -i '' -e "s/^  secretToken.*/  secretToken: \"$(openssl rand -hex 32)\"/" nosecret-config.yaml
+TOKEN=`openssl rand -hex 32`
+sed -i '' -e "s/^  secretToken.*/  secretToken: \"$TOKEN\"/" nosecret-config.yaml
+sed -i '' -e "s/^  secretToken.*/  secretToken: \"$TOKEN\"/" secret-config.yaml
 
 # install jupyterhub on the cluster
 echo "Installing jupyterhub."
