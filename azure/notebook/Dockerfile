@@ -69,6 +69,7 @@ RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
+RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yaml /pre-home
 
 ENV DASK_TICK_MAXIMUM_DELAY=5s
