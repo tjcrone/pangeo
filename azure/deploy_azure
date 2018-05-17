@@ -60,10 +60,15 @@ cd ..
 printf "\nGetting AKS credentials.\n"
 az aks get-credentials --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --output table
 
+# delete current load balancer
+printf "\nDeleting current static IP load balancer.\n"
+IP_ID=`az resource list --name camhd-pangeo-ip --query [*].[id] --output tsv`
+LB_GROUP=`az network public-ip show --ids ${IP_ID} --query resourceGroup --output tsv`
+az network lb delete --name kubernetes --resource-group $LB_GROUP
+
 # move public ip address to the new automatic resource group
 printf "\nMoving static IP address into the new resource group.\n"
-IP_ID=`az resource list --name camhd-pangeo-ip --output tsv | cut -d$'\t' -f1`
-AUTO_GROUP=`az group list --output tsv | grep MC | grep $CLUSTER_NAME | cut -d$'\t' -f4`
+AUTO_GROUP="MC_${RESOURCE_GROUP}_${CLUSTER_NAME}_${LOCATION}"
 az resource move --destination-group $AUTO_GROUP --ids $IP_ID
 
 # set up helm and tiller
