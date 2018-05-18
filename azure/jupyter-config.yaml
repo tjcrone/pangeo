@@ -1,7 +1,7 @@
 singleuser:
   image:
     name: tjcrone/pangeo-notebook
-    tag: 7256f25
+    tag: 4e345c6
   cmd: ['start-singleuser.sh']
 #  extraEnv:
 #    EXTRA_PIP_PACKAGES: >-
