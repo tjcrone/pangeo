@@ -16,6 +16,7 @@ RUN conda install --yes -c conda-forge \
     fastparquet \
     git \
     google-cloud-storage \
+    imagehash \
     lz4 \
     netcdf4 \
     nomkl \

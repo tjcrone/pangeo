@@ -24,6 +24,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     distributed=1.21.4 \
     fastparquet \
     google-cloud-storage \
+    imagehash \
     ipywidgets \
     jupyterlab=0.31.12 \
     julia \
