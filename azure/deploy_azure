@@ -31,19 +31,12 @@ SUBSCRIPTION='Microsoft Azure Sponsorship'
 CLUSTER_NAME="camhd-pangeo-$DTIME"
 MACHINE='Standard_D4_v3'
 NODE_COUNT=3
-PASSPHRASE=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 # setup azure and local env
 echo "Setting account name."
 az account set -s "$SUBSCRIPTION"
 printf "\nCreating resource group.\n"
 az group create --name="$RESOURCE_GROUP" --location="$LOCATION" --output table
-printf "\nCreating ssh-key.\n"
-mkdir $CLUSTER_NAME
-cd $CLUSTER_NAME
-ssh-keygen -P $PASSPHRASE -f ssh-key-$CLUSTER_NAME
-echo $PASSPHRASE > pass-$CLUSTER_NAME
-chmod 600 pass-$CLUSTER_NAME
 
 # usually these only need to be done once but okay to do each time
 az provider register --name Microsoft.Network --wait
@@ -53,8 +46,7 @@ az provider register --name Microsoft.ContainerService --wait
 
 # create an AKS cluster
 printf "\nCreating cluster.\n"
-az aks create --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --ssh-key-value ssh-key-$CLUSTER_NAME.pub --node-count $NODE_COUNT --node-vm-size $MACHINE --kubernetes-version 1.8.6 --output table
-cd ..
+az aks create --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP --generate-ssh-keys --node-count $NODE_COUNT --node-vm-size $MACHINE --kubernetes-version 1.8.6 --output table
 
 # get credentials
 printf "\nGetting AKS credentials.\n"
