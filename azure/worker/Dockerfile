@@ -45,8 +45,9 @@ RUN pip install git+https://github.com/tjcrone/zarr@10738c84c62c83ce8e9ef64d9b53
                 --upgrade
 
 RUN pip install numpngw \
-                pycamhd \
                 azure-storage-blob
+
+RUN pip install git+https://github.com/tjcrone/pycamhd@8bdc18647ec20b0a49dc140d3f71b8ef9dba17a9
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
