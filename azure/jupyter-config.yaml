@@ -41,6 +41,10 @@ hub:
         return pod
     c.KubeSpawner.modify_pod_hook = modify_pod_hook
 
+prePuller:
+  hook:
+    enabled: false
+
 cull:
   enabled: true
   users: false
