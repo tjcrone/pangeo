@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # move into azure directory
-AZURE_DIR='/Users/tjc/research/pangeo/azure'
+AZURE_DIR='/Users/tjc/research/pangeo-data/pangeo/azure'
 cd $AZURE_DIR
 
 # check git status
