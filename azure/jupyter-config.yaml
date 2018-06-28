@@ -1,7 +1,7 @@
 singleuser:
   image:
     name: tjcrone/pangeo-notebook
-    tag: 97b9c75
+    tag: '9877285'
   cmd: ['start-singleuser.sh']
 #  extraEnv:
 #    EXTRA_PIP_PACKAGES: >-
@@ -40,6 +40,7 @@ hub:
         )
         return pod
     c.KubeSpawner.modify_pod_hook = modify_pod_hook
+    c.KubeSpawner.environment = {'EMAIL': generate_user_email}
 
 prePuller:
   hook:

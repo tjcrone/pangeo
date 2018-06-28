@@ -85,9 +85,6 @@ ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 RUN mkdir /gcs && chown -R $NB_USER /gcs
 RUN mkdir /opt/app
 
-# unset git variables for all users
-RUN printf "\n#unset git variables\nunset GIT_AUTHOR_NAME\nunset GIT_COMMITTER_NAME\n" >> /etc/bash.bashrc
-
 # Add NB_USER to sudo
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
