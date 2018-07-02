@@ -1,7 +1,7 @@
 singleuser:
   image:
     name: tjcrone/pangeo-notebook
-    tag: '9877285'
+    tag: 8644bfa
   cmd: ['start-singleuser.sh']
 #  extraEnv:
 #    EXTRA_PIP_PACKAGES: >-
@@ -15,11 +15,11 @@ singleuser:
 #      - name: fuse
 #        mountPath: /dev/fuse
   cpu:
-    limit: 1.8
-    guarantee: 0.9
+    #limit: 1.8
+    guarantee: 3
   memory:
-    limit: 8G
-    guarantee: 4G
+    #limit: 8G
+    guarantee: 12G
 
 rbac:
   enabled: false
@@ -40,7 +40,7 @@ hub:
         )
         return pod
     c.KubeSpawner.modify_pod_hook = modify_pod_hook
-    c.KubeSpawner.environment = {'EMAIL': generate_user_email}
+    c.KubeSpawner.environment = {}
 
 prePuller:
   hook:
