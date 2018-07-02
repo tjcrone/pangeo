@@ -41,7 +41,7 @@ RUN conda install --yes -c ioam -c conda-forge \
     pytables \
     python-blosc \
     scipy \
-    scikit-image \
+    scikit-image=0.14.0 \
     tornado \
     xarray \
     zict \

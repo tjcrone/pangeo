@@ -26,7 +26,7 @@ RUN conda install --yes -c conda-forge \
     pandas \
     pytables \
     python-blosc \
-    scikit-image \
+    scikit-image=0.14.0 \
     scipy \
     xarray \
     zict \
